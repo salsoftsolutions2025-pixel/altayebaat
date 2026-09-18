@@ -15,19 +15,17 @@ export async function POST(request: NextRequest) {
     };
 
     /*
-     * VERCEL CLIENT-REVIEW MODE
+     * TEMPORARY CLIENT-REVIEW MODE
      *
-     * Vercel's filesystem is not permanent storage.
-     * For the temporary client-review website,
-     * accept the consent submission without trying
-     * to write a local JSONL file.
+     * On the deployed Vercel production website,
+     * do not attempt to save to the local filesystem.
      *
-     * Before final production, replace this with
-     * persistent database storage.
+     * Before the final public launch, this will be
+     * replaced with permanent database storage.
      */
-    if (process.env.VERCEL === "1") {
+    if (process.env.NODE_ENV === "production") {
       console.log(
-        "Consent received in Vercel review mode:",
+        "Consent accepted in temporary review mode:",
         JSON.stringify(record)
       );
 
@@ -38,10 +36,10 @@ export async function POST(request: NextRequest) {
     }
 
     /*
-     * LOCAL DEVELOPMENT
+     * LOCAL DEVELOPMENT ONLY
      *
-     * Continue saving consent records locally
-     * when running the website on your own PC.
+     * When running npm run dev on your own computer,
+     * continue saving consent records locally.
      */
     const dataDirectory = path.join(
       process.cwd(),
