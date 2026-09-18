@@ -7,6 +7,20 @@ export default function EnglishFoodSystemPage() {
 
   return (
     <main className="min-h-screen bg-[#fcf9f0] text-[#202820]">
+
+      <div className="mx-auto max-w-6xl px-6 pt-8">
+  <div className="flex justify-center">
+    <Link
+      href="/en"
+      className="rounded-full border border-[#c99a27] px-5 py-2 text-sm font-semibold text-[#c99a27] transition hover:bg-[#c99a27] hover:text-white"
+    >
+      Back to Home
+    </Link>
+  </div>
+</div>
+
+
+
       {/* =========================
           HEADER / TOOLBAR
       ========================== */}

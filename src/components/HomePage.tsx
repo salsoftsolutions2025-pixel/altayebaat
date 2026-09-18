@@ -255,6 +255,14 @@ const testimonialsHref = `/${locale}/testimonials`;
         className="scroll-mt-24 bg-white py-20"
       >
         <div className="mx-auto max-w-5xl px-6 text-center">
+          <div className="mb-8 flex justify-center">
+  <Link
+    href={`/${locale}#home`}
+    className="rounded-full border border-[#c99a27] px-5 py-2 text-sm font-semibold text-[#c99a27] transition hover:bg-[#c99a27] hover:text-white"
+  >
+    {isEnglish ? "Back to Home" : "العودة إلى الرئيسية"}
+  </Link>
+</div>
           <p className="mb-2 font-semibold text-[#c99a27]">
             {content.system.eyebrow}
           </p>
@@ -277,6 +285,15 @@ const testimonialsHref = `/${locale}/testimonials`;
         className="scroll-mt-24 bg-[#f8f4e9] py-20"
       >
         <div className="mx-auto max-w-7xl px-6">
+
+          <div className="mb-8 flex justify-center">
+  <Link
+    href={`/${locale}#home`}
+    className="rounded-full border border-[#c99a27] px-5 py-2 text-sm font-semibold text-[#c99a27] transition hover:bg-[#c99a27] hover:text-white"
+  >
+    {isEnglish ? "Back to Home" : "العودة إلى الرئيسية"}
+  </Link>
+</div>
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <div className={isEnglish ? "text-left" : "text-right"}>
               <p className="mb-3 font-semibold text-[#c99a27]">
