@@ -102,6 +102,43 @@ const testimonialsHref = `/${locale}/testimonials`;
             {content.nav.languageButton}
           </Link>
         </div>
+
+        <div className="border-t border-white/10 px-3 py-2 md:hidden">
+  <nav
+    className={`flex gap-4 overflow-x-auto whitespace-nowrap text-sm font-semibold ${
+      isEnglish ? "justify-start" : "justify-start"
+    }`}
+  >
+    <Link href={`/${locale}#home`} className={navLinkClass}>
+      {content.nav.home}
+    </Link>
+
+    <Link href={`/${locale}#about`} className={navLinkClass}>
+      {content.nav.doctor}
+    </Link>
+
+    <Link href={`/${locale}#system`} className={navLinkClass}>
+      {content.nav.system}
+    </Link>
+
+    <Link href={foodSystemHref} className={navLinkClass}>
+      {isEnglish ? "Food Guide" : "دليل الأغذية"}
+    </Link>
+
+    <Link href={videosHref} className={navLinkClass}>
+      {content.nav.videos}
+    </Link>
+
+    <Link href={booksHref} className={navLinkClass}>
+      {content.nav.books}
+    </Link>
+
+    <Link href={testimonialsHref} className={navLinkClass}>
+      {isEnglish ? "Testimonials" : "شهادات وتجارب"}
+    </Link>
+  </nav>
+</div>
+
       </header>
 
       {/* =========================
