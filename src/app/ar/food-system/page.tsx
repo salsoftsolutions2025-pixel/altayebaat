@@ -11,18 +11,6 @@ export default function ArabicFoodSystemPage() {
       className="min-h-screen bg-[#fcf9f0] text-[#202820]"
     >
 
-      <div className="mx-auto max-w-6xl px-6 pt-8">
-  <div className="flex justify-center">
-    <Link
-      href="/ar"
-      className="rounded-full border border-[#c99a27] px-5 py-2 text-sm font-semibold text-[#c99a27] transition hover:bg-[#c99a27] hover:text-white"
-    >
-      العودة إلى الرئيسية
-    </Link>
-  </div>
-</div>
-
-      
 
       {/* =========================
           HEADER / TOOLBAR
@@ -90,6 +78,17 @@ export default function ArabicFoodSystemPage() {
           </Link>
         </div>
       </header>
+
+        <div className="mx-auto max-w-6xl px-6 pt-8">
+  <div className="flex justify-center">
+    <Link
+      href="/ar"
+      className="rounded-full border border-[#c99a27] px-5 py-2 text-sm font-semibold text-[#c99a27] transition hover:bg-[#c99a27] hover:text-white"
+    >
+      العودة إلى الرئيسية
+    </Link>
+  </div>
+</div>
 
       {/* =========================
           FOOD GUIDE
