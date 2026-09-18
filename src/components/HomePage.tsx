@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -18,6 +21,7 @@ export default function HomePage({
   content,
 }: HomePageProps) {
   const isEnglish = locale === "en";
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const languageHref = isEnglish ? "/ar" : "/en";
 const videosHref = `/${locale}/videos`;
@@ -103,40 +107,81 @@ const testimonialsHref = `/${locale}/testimonials`;
           </Link>
         </div>
 
-        <div className="border-t border-white/10 px-3 py-2 md:hidden">
-  <nav
-    className={`flex gap-4 overflow-x-auto whitespace-nowrap text-sm font-semibold ${
-      isEnglish ? "justify-start" : "justify-start"
-    }`}
+  <div className="border-t border-white/10 md:hidden">
+  <button
+    type="button"
+    onClick={() => setMobileMenuOpen((open) => !open)}
+    className="flex w-full items-center justify-between px-6 py-3 text-base font-bold text-white"
+    aria-expanded={mobileMenuOpen}
   >
-    <Link href={`/${locale}#home`} className={navLinkClass}>
-      {content.nav.home}
-    </Link>
+    <span>
+      {isEnglish ? "Menu" : "القائمة"}
+    </span>
 
-    <Link href={`/${locale}#about`} className={navLinkClass}>
-      {content.nav.doctor}
-    </Link>
+    <span className="text-2xl leading-none">
+      {mobileMenuOpen ? "×" : "☰"}
+    </span>
+  </button>
 
-    <Link href={`/${locale}#system`} className={navLinkClass}>
-      {content.nav.system}
-    </Link>
+  {mobileMenuOpen && (
+    <nav className="flex flex-col border-t border-white/10 bg-[#0e3a20] px-6 py-3 text-base font-semibold">
+      <Link
+        href={`/${locale}#home`}
+        onClick={() => setMobileMenuOpen(false)}
+        className="border-b border-white/10 py-3 hover:text-[#e6c45a]"
+      >
+        {content.nav.home}
+      </Link>
 
-    <Link href={foodSystemHref} className={navLinkClass}>
-      {isEnglish ? "Food Guide" : "دليل الأغذية"}
-    </Link>
+      <Link
+        href={`/${locale}#about`}
+        onClick={() => setMobileMenuOpen(false)}
+        className="border-b border-white/10 py-3 hover:text-[#e6c45a]"
+      >
+        {content.nav.doctor}
+      </Link>
 
-    <Link href={videosHref} className={navLinkClass}>
-      {content.nav.videos}
-    </Link>
+      <Link
+        href={`/${locale}#system`}
+        onClick={() => setMobileMenuOpen(false)}
+        className="border-b border-white/10 py-3 hover:text-[#e6c45a]"
+      >
+        {content.nav.system}
+      </Link>
 
-    <Link href={booksHref} className={navLinkClass}>
-      {content.nav.books}
-    </Link>
+      <Link
+        href={foodSystemHref}
+        onClick={() => setMobileMenuOpen(false)}
+        className="border-b border-white/10 py-3 hover:text-[#e6c45a]"
+      >
+        {isEnglish ? "Food Guide" : "دليل الأغذية"}
+      </Link>
 
-    <Link href={testimonialsHref} className={navLinkClass}>
-      {isEnglish ? "Testimonials" : "شهادات وتجارب"}
-    </Link>
-  </nav>
+      <Link
+        href={videosHref}
+        onClick={() => setMobileMenuOpen(false)}
+        className="border-b border-white/10 py-3 hover:text-[#e6c45a]"
+      >
+        {content.nav.videos}
+      </Link>
+
+      <Link
+        href={booksHref}
+        onClick={() => setMobileMenuOpen(false)}
+        className="border-b border-white/10 py-3 hover:text-[#e6c45a]"
+      >
+        {content.nav.books}
+      </Link>
+
+      <Link
+        href={testimonialsHref}
+        onClick={() => setMobileMenuOpen(false)}
+        className="py-3 hover:text-[#e6c45a]"
+      >
+        {isEnglish ? "Testimonials" : "شهادات وتجارب"}
+      </Link>
+    </nav>
+  )}
 </div>
 
       </header>
