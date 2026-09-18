@@ -1,167 +1,82 @@
-import {
-  NextRequest,
-  NextResponse,
-} from "next/server";
-
-import { promises as fs } from "fs";
+import { NextRequest, NextResponse } from "next/server";
+import { appendFile, mkdir } from "fs/promises";
 import path from "path";
-import crypto from "crypto";
 
-import {
-  CONSENT_VERSION,
-  consentContent,
-} from "@/data/consent";
-
-export const runtime = "nodejs";
-
-type ConsentRequest = {
-  language?: "ar" | "en";
-  itemsAccepted?: number[];
-};
-
-function createConsentTextHash() {
-  const exactConsentText =
-    JSON.stringify({
-      version: CONSENT_VERSION,
-      content: consentContent,
-    });
-
-  return crypto
-    .createHash("sha256")
-    .update(
-      exactConsentText,
-      "utf8"
-    )
-    .digest("hex");
-}
-
-export async function POST(
-  request: NextRequest
-) {
+export async function POST(request: NextRequest) {
   try {
-    const body =
-      (await request.json()) as ConsentRequest;
-
-    const language =
-      body.language === "ar"
-        ? "ar"
-        : "en";
-
-    const itemsAccepted =
-      Array.isArray(
-        body.itemsAccepted
-      )
-        ? body.itemsAccepted
-        : [];
-
-    const acceptedAll =
-      itemsAccepted.includes(1) &&
-      itemsAccepted.includes(2) &&
-      itemsAccepted.includes(3);
-
-    if (!acceptedAll) {
-      return NextResponse.json(
-        {
-          success: false,
-          message:
-            "All three consent items must be accepted.",
-        },
-        {
-          status: 400,
-        }
-      );
-    }
-
-    const consentId =
-      crypto.randomUUID();
-
-    const acceptedAt =
-      new Date().toISOString();
-
-    const consentTextHash =
-      createConsentTextHash();
-
-    const userAgent =
-      request.headers.get(
-        "user-agent"
-      ) ?? "unknown";
-
-    const acceptLanguage =
-      request.headers.get(
-        "accept-language"
-      ) ?? "unknown";
+    const body = await request.json();
 
     const record = {
-      consentId,
-      acceptedAt,
-      consentVersion:
-        CONSENT_VERSION,
-      language,
-      itemsAccepted: [
-        1,
-        2,
-        3,
-      ],
-      consentTextHash,
-      userAgent,
-      acceptLanguage,
+      ...body,
+      receivedAt: new Date().toISOString(),
+      userAgent: request.headers.get("user-agent") ?? "",
+      acceptLanguage:
+        request.headers.get("accept-language") ?? "",
     };
 
-    const dataDirectory =
-      path.join(
-        process.cwd(),
-        "data"
+    /*
+     * VERCEL CLIENT-REVIEW MODE
+     *
+     * Vercel's filesystem is not permanent storage.
+     * For the temporary client-review website,
+     * accept the consent submission without trying
+     * to write a local JSONL file.
+     *
+     * Before final production, replace this with
+     * persistent database storage.
+     */
+    if (process.env.VERCEL === "1") {
+      console.log(
+        "Consent received in Vercel review mode:",
+        JSON.stringify(record)
       );
 
-    await fs.mkdir(
+      return NextResponse.json({
+        success: true,
+        reviewMode: true,
+      });
+    }
+
+    /*
+     * LOCAL DEVELOPMENT
+     *
+     * Continue saving consent records locally
+     * when running the website on your own PC.
+     */
+    const dataDirectory = path.join(
+      process.cwd(),
+      "data"
+    );
+
+    await mkdir(dataDirectory, {
+      recursive: true,
+    });
+
+    const consentFile = path.join(
       dataDirectory,
-      {
-        recursive: true,
-      }
+      "consent-records.jsonl"
     );
 
-    const consentFile =
-      path.join(
-        dataDirectory,
-        "consent-records.jsonl"
-      );
-
-    await fs.appendFile(
+    await appendFile(
       consentFile,
-      JSON.stringify(record) +
-        "\n",
+      `${JSON.stringify(record)}\n`,
       "utf8"
-    );
-
-    console.log(
-      "Consent saved:",
-      consentFile
-    );
-
-    console.log(
-      "Consent ID:",
-      consentId
     );
 
     return NextResponse.json({
       success: true,
-      consentId,
-      acceptedAt,
-      consentVersion:
-        CONSENT_VERSION,
-      consentTextHash,
+      reviewMode: false,
     });
   } catch (error) {
     console.error(
-      "Consent recording failed:",
+      "Consent recording error:",
       error
     );
 
     return NextResponse.json(
       {
         success: false,
-        message:
-          "Unable to record consent.",
+        error: "Unable to record consent.",
       },
       {
         status: 500,
