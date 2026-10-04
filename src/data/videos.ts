@@ -14,6 +14,14 @@ export type VideoCategory =
   | "shorts"
   | "other";
 
+  export type VideoArchiveCategory =
+  | "official"
+  | "dated-youtube"
+  | "aljada"
+  | "mixed"
+  | "supermarket"
+  | "alarabiya";
+
 export type VideoItem = {
   id: number;
   youtubeId: string;
@@ -22,7 +30,11 @@ export type VideoItem = {
   titleEn: string;
   descriptionAr: string;
   descriptionEn: string;
+
   category: VideoCategory;
+
+  archiveCategory?: VideoArchiveCategory;
+
   duration: string;
   thumbnail: string;
   videoUrl: string;
@@ -473,3 +485,37 @@ export const videoCategories = [
     nameEn: "Other Topics",
   },
 ];
+
+
+export const archiveCategories = [
+  {
+    id: "official",
+    nameAr: "البث الرسمي للدكتور ضياء العوضي",
+    nameEn: "Dr. Diaa Al-Awady Official YouTube",
+  },
+  {
+    id: "dated-youtube",
+    nameAr: "لايفات اليوتيوب الرسمية معلومة التاريخ",
+    nameEn: "Official YouTube Lives – Dated",
+  },
+  {
+    id: "aljada",
+    nameAr: "لايفات الجادة",
+    nameEn: "Al-Jada Live Videos",
+  },
+  {
+    id: "mixed",
+    nameAr: "لايفات متنوعة",
+    nameEn: "Various Live Videos",
+  },
+  {
+    id: "supermarket",
+    nameAr: "لايفات السوبر ماركت",
+    nameEn: "Supermarket Live Videos",
+  },
+  {
+    id: "alarabiya",
+    nameAr: "لايفات العربية",
+    nameEn: "Al Arabiya Live Videos",
+  },
+] as const;

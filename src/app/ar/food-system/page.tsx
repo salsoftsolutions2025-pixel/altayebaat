@@ -20,7 +20,7 @@ export default function ArabicFoodSystemPage() {
           {/* Brand */}
           <Link href="/ar" className="flex items-center gap-3">
             <Image
-              src="/images/altayebaat-logo.png"
+              src="/images/altayebaat-logo-v2.png"
               alt="نظام الطيبات"
               width={58}
               height={58}

@@ -65,7 +65,7 @@ export default function BooksPage({
             className="flex items-center gap-3"
           >
             <Image
-              src="/images/altayebaat-logo.png"
+              src="/images/altayebaat-logo-v2.png"
               alt={
                 isArabic
                   ? "شعار نظام الطيبات"
@@ -150,7 +150,7 @@ export default function BooksPage({
 
               <div className="relative z-10 text-center">
                 <Image
-                  src="/images/altayebaat-logo.png"
+                  src="/images/altayebaat-logo-v2.png"
                   alt={
                     isArabic
                       ? "نظام الطيبات"
@@ -385,7 +385,7 @@ export default function BooksPage({
       {/* Footer */}
       <footer className="bg-[#0e3a20] px-5 py-10 text-center text-white md:px-8">
         <Image
-          src="/images/altayebaat-logo.png"
+          src="/images/altayebaat-logo-v2.png"
           alt="Al-Tayyibat"
           width={64}
           height={64}

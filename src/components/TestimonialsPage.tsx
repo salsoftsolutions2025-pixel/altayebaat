@@ -43,7 +43,7 @@ export default function TestimonialsPage({
             className="flex items-center gap-3"
           >
             <Image
-              src="/images/altayebaat-logo.png"
+              src="/images/altayebaat-logo-v2.png"
               alt={
                 isArabic
                   ? "شعار نظام الطيبات"
@@ -180,7 +180,7 @@ export default function TestimonialsPage({
           <div className="mx-auto max-w-2xl rounded-[28px] border border-[#c99a27]/25 bg-white px-7 py-14 text-center shadow-lg">
 
             <Image
-              src="/images/altayebaat-logo.png"
+              src="/images/altayebaat-logo-v2.png"
               alt="Al-Tayyibat"
               width={96}
               height={96}
@@ -336,7 +336,7 @@ export default function TestimonialsPage({
       <footer className="bg-[#0e3a20] px-5 py-10 text-center text-white">
 
         <Image
-          src="/images/altayebaat-logo.png"
+          src="/images/altayebaat-logo-v2.png"
           alt="Al-Tayyibat"
           width={64}
           height={64}

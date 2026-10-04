@@ -12,7 +12,9 @@ import VideoModal from "@/components/VideoModal";
 import {
   videos,
   videoCategories,
+  archiveCategories,
   type VideoCategory,
+  type VideoArchiveCategory,
   type VideoItem,
 } from "@/data/videos";
 
@@ -21,6 +23,10 @@ type Locale = "ar" | "en";
 type SelectedCategory =
   | "all"
   | VideoCategory;
+
+  type SelectedArchiveCategory =
+  | "all"
+  | VideoArchiveCategory;
 
 type LocalizedVideoPageProps = {
   locale: Locale;
@@ -36,6 +42,12 @@ export default function LocalizedVideoPage({
     setSelectedCategory,
   ] =
     useState<SelectedCategory>("all");
+
+    const [
+  selectedArchiveCategory,
+  setSelectedArchiveCategory,
+] =
+  useState<SelectedArchiveCategory>("all");
 
   const [searchTerm, setSearchTerm] =
     useState("");
@@ -59,6 +71,10 @@ export default function LocalizedVideoPage({
         video.category ===
           selectedCategory;
 
+      const matchesArchiveCategory =
+        selectedArchiveCategory === "all" ||
+        video.archiveCategory === selectedArchiveCategory;
+
       const matchesSearch =
         search === "" ||
         video.titleAr
@@ -79,11 +95,13 @@ export default function LocalizedVideoPage({
 
       return (
         matchesCategory &&
-        matchesSearch
+        matchesArchiveCategory &&
+          matchesSearch
       );
     });
   }, [
     selectedCategory,
+    selectedArchiveCategory,
     searchTerm,
   ]);
 
@@ -198,6 +216,61 @@ export default function LocalizedVideoPage({
           </div>
         </div>
       </section>
+
+      {/* Archive Categories */}
+<section className="border-b border-[#eadfbf] bg-[#fcf9f0] py-8">
+  <div className="mx-auto max-w-7xl px-6">
+
+    <div className="mb-4 text-center">
+      <h2 className="text-2xl font-bold text-[#174e2b]">
+        {isEnglish
+          ? "Video Archive"
+          : "أرشيف الفيديوهات"}
+      </h2>
+    </div>
+
+    <div className="flex flex-wrap justify-center gap-3">
+
+      <button
+        type="button"
+        onClick={() =>
+          setSelectedArchiveCategory("all")
+        }
+        className={`rounded-full border px-5 py-2 text-sm font-semibold transition ${
+          selectedArchiveCategory === "all"
+            ? "border-[#174e2b] bg-[#174e2b] text-white"
+            : "border-[#c99a27] bg-white text-[#174e2b] hover:bg-[#c99a27] hover:text-white"
+        }`}
+      >
+        {isEnglish
+          ? "All Archive Videos"
+          : "جميع فيديوهات الأرشيف"}
+      </button>
+
+      {archiveCategories.map((category) => (
+        <button
+          key={category.id}
+          type="button"
+          onClick={() =>
+            setSelectedArchiveCategory(
+              category.id as VideoArchiveCategory
+            )
+          }
+          className={`rounded-full border px-5 py-2 text-sm font-semibold transition ${
+            selectedArchiveCategory === category.id
+              ? "border-[#174e2b] bg-[#174e2b] text-white"
+              : "border-[#c99a27] bg-white text-[#174e2b] hover:bg-[#c99a27] hover:text-white"
+          }`}
+        >
+          {isEnglish
+            ? category.nameEn
+            : category.nameAr}
+        </button>
+      ))}
+
+    </div>
+  </div>
+</section>
 
       {/* Category Filters */}
       <section className="border-b border-[#eadfbf] bg-white py-8">

@@ -18,7 +18,7 @@ export default function EnglishFoodSystemPage() {
           {/* Brand */}
           <Link href="/en" className="flex items-center gap-3">
             <Image
-              src="/images/altayebaat-logo.png"
+              src="/images/altayebaat-logo-v2.png"
               alt="Al-Tayyibat System"
               width={58}
               height={58}

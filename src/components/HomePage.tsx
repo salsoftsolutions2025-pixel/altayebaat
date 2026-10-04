@@ -48,7 +48,7 @@ const testimonialsHref = `/${locale}/testimonials`;
             className="flex items-center gap-3"
           >
             <Image
-              src="/images/altayebaat-logo.png"
+              src="/images/altayebaat-logo-v2.png"
               alt={content.brand}
               width={58}
               height={58}
@@ -237,7 +237,7 @@ const testimonialsHref = `/${locale}/testimonials`;
 
         <div className="order-1 flex justify-center md:order-2">
           <Image
-            src="/images/altayebaat-logo.png"
+            src="/images/altayebaat-logo-v2.png"
             alt={content.brand}
             width={580}
             height={580}
@@ -335,7 +335,7 @@ const testimonialsHref = `/${locale}/testimonials`;
               <div className="relative overflow-hidden rounded-[2rem] bg-white p-6 shadow-xl">
                 <div className="flex justify-center">
                   <Image
-                    src="/images/altayebaat-logo.png"
+                    src="/images/altayebaat-logo-v2.png"
                     alt={content.doctor.name}
                     width={430}
                     height={430}
@@ -561,7 +561,7 @@ const testimonialsHref = `/${locale}/testimonials`;
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-6 text-center md:flex-row">
           <div className="flex items-center gap-3">
             <Image
-              src="/images/altayebaat-logo.png"
+              src="/images/altayebaat-logo-v2.png"
               alt={content.brand}
               width={55}
               height={55}
